@@ -4,7 +4,6 @@ body {
 }
 nav ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    color: midnightblue;
     padding: 0px;
     list-style: none;
     font-weight: bold;
@@ -23,7 +22,7 @@ a:hover {
 h1 {
     font-size: 3em;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
-    color: midnightblue;
+    color: #191970;
 }
 h2 {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
@@ -38,11 +37,11 @@ p {
     color: #333;
 }
 footer {
-    border-top: 1px solid #d5d5d5;
+    border-top: 1px solid #191970;
     font-size: .8em;
 }
 nav {
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid #191970;
 }
 ul.posts { 
     margin: 20px auto 40px; 
