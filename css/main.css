@@ -60,3 +60,7 @@ ul.posts li {
   width: 100%;
   height: auto;
 }
+.homeimage {
+    float: right;
+    margin: 10px;
+}
