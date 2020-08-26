@@ -61,6 +61,6 @@ ul.posts li {
   height: auto;
 }
 .homeimage {
-    float: right;
+    float: left;
     margin: 10px;
 }
