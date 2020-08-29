@@ -57,6 +57,10 @@ ul.posts li {
     list-style: none;
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
 }
+ul li {
+    list-style: none;
+    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
 
 .responsive {
   width: 100%;
