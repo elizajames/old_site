@@ -163,38 +163,7 @@ recheck how origination names are parsed (multiples AND font colors)
                         $position"
         />
     </xsl:function>
-	<xsl:function name="mdc:iso-date-2-display-form" as="xs:string*">
-        <xsl:param name="date" as="xs:string"/>
-        <xsl:variable name="months"
-            select="
-            ('January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December')"/>
-        <xsl:analyze-string select="$date" flags="x" regex="(\d{{4}})(\d{{2}})?(\d{{2}})?">
-            <xsl:matching-substring>
-                <!-- year -->
-                <xsl:value-of select="regex-group(1)"/>
-                <!-- month (can't add an if,then,else '' statement here without getting an extra space at the end of the result-->
-                <xsl:if test="regex-group(2)">
-                    <xsl:value-of select="subsequence($months, number(regex-group(2)), 1)"/>
-                </xsl:if>
-                <!-- day -->
-                <xsl:if test="regex-group(3)">
-                    <xsl:number value="regex-group(3)" format="1"/>
-                </xsl:if>
-                <!-- still need to handle time... but if that's there, then I can just use xs:dateTime !!!! -->
-            </xsl:matching-substring>
-        </xsl:analyze-string>
-    </xsl:function>
+
 
     <xsl:template match="ss:Workbook">
         <!-- should I change an existing archdesc to be unpublished if the new param is set?? -->
@@ -1454,7 +1423,40 @@ recheck how origination names are parsed (multiples AND font colors)
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-     <xsl:template match="@*|node()">
+       <xsl:function name="mdc:iso-date-2-display-form" as="xs:string*">
+        <xsl:param name="date" as="xs:string"/>
+        <xsl:variable name="months"
+            select="
+            ('January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December')"/>
+        <xsl:analyze-string select="$date" flags="x" regex="(\d{{4}})(\d{{2}})?(\d{{2}})?">
+            <xsl:matching-substring>
+                <!-- year -->
+                <xsl:value-of select="regex-group(1)"/>
+                <!-- month (can't add an if,then,else '' statement here without getting an extra space at the end of the result-->
+                <xsl:if test="regex-group(2)">
+                    <xsl:value-of select="subsequence($months, number(regex-group(2)), 1)"/>
+                </xsl:if>
+                <!-- day -->
+                <xsl:if test="regex-group(3)">
+                    <xsl:number value="regex-group(3)" format="1"/>
+                </xsl:if>
+                <!-- still need to handle time... but if that's there, then I can just use xs:dateTime !!!! -->
+            </xsl:matching-substring>
+        </xsl:analyze-string>
+    </xsl:function>
+    
+    <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
