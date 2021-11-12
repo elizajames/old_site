@@ -310,7 +310,7 @@ recheck how origination names are parsed (multiples AND font colors)
             as="xs:integer"/>
         <xsl:param name="level"
             select="
-                if (not(matches(ss:Cell[2]/ss:Data, '^(series|subseries|file|item|accession)$'))) then
+                if (not(matches(ss:Cell[2]/ss:Data, '^(series|subseries|file|item|accession|box)$'))) then
                     'file'
                 else
                     ss:Cell[2]/ss:Data/text()
