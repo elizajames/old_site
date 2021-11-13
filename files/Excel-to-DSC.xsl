@@ -737,41 +737,8 @@
                 </physdesc>
             </xsl:when>
 
-            <xsl:when test="$column-number eq 31">
-                <origination>
-                    <xsl:choose>
-                        <xsl:when
-                            test="
-                                key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#0070C0', '#0066CC')
-                                and
-                                not(ss:Data/html:Font/@html:Color = ('#0070C0', '#0066CC'))">
-                            <corpname>
-                                <xsl:apply-templates/>
-                            </corpname>
-                        </xsl:when>
-                        <xsl:when
-                            test="
-                                key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#666699', '#7030A0')
-                                and
-                                not(ss:Data/html:Font/@html:Color = ('#666699', '#7030A0'))">
-                            <persname>
-                                <xsl:apply-templates/>
-                            </persname>
-                        </xsl:when>
-                        <xsl:when
-                            test="
-                                key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#ED7D31', '#FF6600')
-                                and
-                                not(ss:Data/html:Font/@html:Color = ('#ED7D31', '#FF6600'))">
-                            <famname>
-                                <xsl:apply-templates/>
-                            </famname>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </origination>
+            <xsl:when test="$column-number eq 31">           
+                 <xsl:apply-templates/>
             </xsl:when>
 
             <xsl:when test="$column-number eq 37">
@@ -923,19 +890,6 @@
                 </p>
             </xsl:when>
             
-
-            <xsl:when
-                test="
-                    key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Size eq '14'
-                    and html:Font[@html:Size = '11'][1]/starts-with(., '&#10;')
-                    and not(html:Font[1]/@html:Size eq '14')">
-                <head>
-                    <xsl:apply-templates select="text()[1]"/>
-                </head>
-                <p>
-                    <xsl:apply-templates select="node() except text()[1]"/>
-                </p>
-            </xsl:when>
 
             <xsl:when test="starts-with(text()[1], '&#10;')">
                 <xsl:apply-templates select="text()[1]"/>
