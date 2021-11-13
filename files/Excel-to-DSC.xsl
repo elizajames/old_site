@@ -17,111 +17,10 @@
             <xd:p>tested with Saxon-HE 9.6.0.5</xd:p>
         </xd:desc>
     </xd:doc>
-
-    <!-- to do:
-  
-  recheck how dates are parsed
-
-recheck how origination names are parsed (multiples AND font colors)
-        
-        update how physdesc mixed content is handled?  (allow genreform, dimensions???)
-          
-        -->
-    <xsl:key name="style-ids_match-for-color" match="ss:Style" use="@ss:ID"/>
    
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
     <xsl:preserve-space elements="*:Data *:Font"/>
-    <!--   (1 - 56 / A - BD), columns in Excel
-        1   - level number (no default..  requires at least one level-1 value; level-0 values are used for repeating values wihtin the same component; e.g. multiple unitdate expressions)
-        2   - level type  (if no value, the level will = "file")
-        3   - unitid (ex: 1 (for "Series 1").  if blank, should the transformation auto-number the series and subseries??? add paramters for whether to auto-number, roman vs. arabic numerals, etc.) (did)
-        4   - title (did)
-  
-        5   - date expression (did)
-        6   - year begin (did)
-        7   - month begin
-        8   - day begin
-        9   - year end (did)
-        10 - month end
-        11 - day end
-        
-        12 - bulk year begin (did) [hidden]
-        13 - bulk month begin
-        14 - bulk day begin
-        15 - bulk year end (did) [hidden]
-        16 - bulk month end
-        17 - bulk day end
-         
-        18 - instance type (mixed materials by default) (did)
-        19 - container 1 type ("Box" is used if a value is present and the type is blank) (did)
-        20 - container profile (did)
-        21 - barcode (did)
-        22 - container 1 value (did)
-        
-        23 - container 2 type ("Folder" is used if a value is present and the type is blank) (did)
-        24 - container 2 value (did)
-        25 - container 3 type ("Carton" is used if a value is present and the type is blank) (did)
-        26 - container 3 value (did)
-        
-        27 - extent number (did)
-        28 - extent value (did)
-        29 - generic extent statement (did)
-        
-        30 - generic physdesc statement (allow subelements like dimensions, genreform, and physfacet???) (did)
-        
-        31 - origination (fyi: @role is NOT supported here) (did)
-        32 - bioghist note
-        33 - scope and content note 
-        34 - arrangement
-        
-        35 - access restrictions
-        36 - phystech
-        37 - physloc (did)
-        38 - use restrictions
-        39 - language code (only 1 allowed, according to AT and ASpace models, and no @script attribute) (did)
-        40 - langmaterial (just supports text for now) (did)
-        41 - other finding aid
-             
-        42 - custodial history <custodhist>
-        43 - immediate source of aquisition <acqinfo>
-        44 - appraisal 
-        45 - accruals
-             
-        46 - location of originals <originalsloc>
-        47 - alternative form available
-        48 - related material
-        49 - separated material 
-
-        50 - preferred citation (discourage use, since it should be automated / inherited)
-        51 - process information
-        52 - control access (see color coding in the "style-ids_match-for-color" key)
-                        
-        53 - @id  (herbie, the love bug)
-        
-        54 - dao link (did) 
-        55 - dao title (did)
-        
-        56 - system id (where we'll park the ASpace URI fragment)
-         
-         EAD elements/attributes that are NOT currently supported include:
-         - daogrp
-         - bibliography
-         - fileplan
-         - index
-         - odd (though I should add this somewhere)
-         - note
-         - @role (in origination/* elements)
-         - @script 
-         - and a whole lot of other attributes, like @calendar, @certainty, etc.!
-         
-         ref, extref, etc.  still need to add support for these.
-         lists (including chronlist, eventgrp, etc.).
-         
-         Note, though, that all of these EAD features will still be copied over from the collection-level description, which is where they occur more frequently.  
-         These features just aren't supproted currently in the Excel DSC worksheet.
-
-        -->
     
     <xsl:param name="keep-unpublished" select="true()"/>
 
@@ -150,7 +49,6 @@ recheck how origination names are parsed (multiples AND font colors)
 
 
     <xsl:template match="ss:Workbook">
-        <!-- should I change an existing archdesc to be unpublished if the new param is set?? -->
         <xsl:param name="workbook" select="." as="node()"/>
         <xsl:if test="not(ss:Worksheet[@ss:Name = 'ContainerList'])">
             <xsl:message terminate="yes">
