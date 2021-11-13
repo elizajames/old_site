@@ -28,23 +28,7 @@ recheck how origination names are parsed (multiples AND font colors)
           
         -->
     <xsl:key name="style-ids_match-for-color" match="ss:Style" use="@ss:ID"/>
-    <!-- will probably want to change how this works, but right now you can create mixed content with the following font colors (which results in a pretty hideous rainbow):
-        (when there's a second color, that's to deal with the issue of 
-        converting a file from XML to XLSX, at which point MS Excel changes the color)
-        #FF0000 = title
-        #0070C0, #0066CC = corpname
-        #7030A0, #666699 = persname  e.g. =('#666699', '#7030A0')
-        #ED7D31, #FF6600 = famname
-        #44546A, #339966 = geogname
-        #00B050, #008080 = genreform     
-        #00B0F0, #00CCFF = subject
-        #FFC000, #FFCC00 = occupation
-        #FF00FF = function
-        #000000 = name, but only in the controlaccess column.
-        
-        italics, underline, bold, etc. (all the emph options) are handled with the other font controls in Excel (e.g. bold -> emph render='bold', etc.)
-      -->
-
+   
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
     <xsl:preserve-space elements="*:Data *:Font"/>
