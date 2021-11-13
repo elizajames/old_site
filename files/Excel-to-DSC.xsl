@@ -394,7 +394,7 @@
             </xsl:when>
             <xsl:when test="$column-number eq 4">
                 <unittitle>
-                            <xsl:apply-templates/>
+                    <xsl:apply-templates/>
                 </unittitle>
             </xsl:when>
             <!-- there should a better way to deal with dates / other grouped cells -->
