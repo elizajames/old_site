@@ -161,7 +161,7 @@
             as="xs:integer"/>
         <xsl:param name="level"
             select="
-                if (not(matches(ss:Cell[2]/ss:Data, '^(series|subseries|file|item|accession)$'))) then
+                if (not(matches(ss:Cell[2]/ss:Data, '^(series|subseries|file|item|accession|box)$'))) then
                     'file'
                 else
                     ss:Cell[2]/ss:Data/text()
@@ -956,63 +956,9 @@
                 </xsl:apply-templates>
             </xsl:when>
 
-            <xsl:when test="number($column-number) = (52) and not(*)">
-                <xsl:choose>
-                    <xsl:when
-                        test="
-                        key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#00B0F0', '#00CCFF')
-                        and
-                        not(ss:Data/html:Font/@html:Color = ('#00B0F0', '#00CCFF'))">
-                        <subject>
-                            <xsl:apply-templates/>
-                        </subject>
-                    </xsl:when>
-                    <xsl:when
-                        test="
-                            key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#0070C0', '#0066CC')
-                            and
-                            not(ss:Data/html:Font/@html:Color = ('#0070C0', '#0066CC'))">
-                        <corpname>
-                            <xsl:apply-templates/>
-                        </corpname>
-                    </xsl:when>
-                    <xsl:when
-                        test="
-                            key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#666699', '#7030A0')
-                            and
-                            not(ss:Data/html:Font/@html:Color = ('#666699', '#7030A0'))">
-                        <persname>
-                            <xsl:apply-templates/>
-                        </persname>
-                    </xsl:when>
-                    <xsl:when
-                        test="
-                            key('style-ids_match-for-color', $style-id)/ss:Font/@ss:Color = ('#ED7D31', '#FF6600')
-                            and
-                            not(ss:Data/html:Font/@html:Color = ('#ED7D31', '#FF6600'))">
-                        <famname>
-                            <xsl:apply-templates/>
-                        </famname>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-
             <!-- hack way to deal with adding <head> elements for scope and content and other types of notes.-->
             <!-- also gotta check style ids, since if you re-save an Excel file, it'll strip the font element out and replace it with an ID :( -->
             
-            <!-- pontential encoding:
-                    <Cell ss:Index="42" ss:StyleID="s61">
-                    <ss:Data ss:Type="String"
-      xmlns="http://www.w3.org/TR/REC-html40"><Font html:Size="14"
-       html:Color="#000000">Provenance&#10;</Font>
-       <Font html:Color="#000000">Has an ink stamp</Font>
-       </ss:Data>
-       </Cell>
-
-  -->
             <xsl:when test="starts-with(*[2], '&#10;') and not(html:Font[1]/@html:Size eq '14')">
                 <head>
                     <xsl:apply-templates select="*[1]"/>
@@ -1176,46 +1122,7 @@
         </head>
     </xsl:template>
 
-    <xsl:template match="*:Font[@html:Color = ('#0070C0', '#0066CC')][normalize-space()]">
-        <corpname>
-            <xsl:apply-templates/>
-        </corpname>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#666699', '#7030A0')][normalize-space()]">
-        <persname>
-            <xsl:apply-templates/>
-        </persname>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#ED7D31', '#FF6600')][normalize-space()]">
-        <famname>
-            <xsl:apply-templates/>
-        </famname>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#44546A', '#339966')][normalize-space()]">
-        <geogname>
-            <xsl:apply-templates/>
-        </geogname>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#00B050', '#008080')][normalize-space()]">
-        <genreform>
-            <xsl:apply-templates/>
-        </genreform>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#00B0F0', '#00CCFF')][normalize-space()]">
-        <subject>
-            <xsl:apply-templates/>
-        </subject>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = ('#FFC000', '#FFCC00')][normalize-space()]">
-        <occupation>
-            <xsl:apply-templates/>
-        </occupation>
-    </xsl:template>
-    <xsl:template match="*:Font[@html:Color = '#FF00FF'][normalize-space()]">
-        <function>
-            <xsl:apply-templates/>
-        </function>
-    </xsl:template>
+
     <xsl:template match="*:Font[@html:Color = '#000000'][not(@html:Size = '14')][normalize-space()]" priority="2">
         <xsl:param name="column-number"/>
         <xsl:choose>
@@ -1226,42 +1133,6 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template match="*:Font[@html:Color = '#FF0000'][normalize-space()]">
-        <xsl:param name="column-number"/>
-        <xsl:choose>
-            <xsl:when test=".[parent::html:I/parent::html:B]">
-                <title render="bolditalic">
-                    <xsl:apply-templates/>
-                </title>
-            </xsl:when>
-            <xsl:when test=".[parent::html:I]">
-                <title render="italic">
-                    <xsl:apply-templates/>
-                </title>
-            </xsl:when>
-            <xsl:when test=".[parent::html:B]">
-                <title render="bold">
-                    <xsl:apply-templates/>
-                </title>
-            </xsl:when>
-            <xsl:when test=".[parent::html:U]">
-                <title render="underline">
-                    <xsl:apply-templates/>
-                </title>
-            </xsl:when>
-            <xsl:when test="number($column-number) eq 52">
-                <title>
-                    <xsl:apply-templates/>
-                </title>
-            </xsl:when>
-            <xsl:otherwise>
-                <title>
-                    <xsl:apply-templates/>
-                </title>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
