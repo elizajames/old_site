@@ -197,7 +197,7 @@
             </xsl:attribute>
             <xsl:if test="$level = 'box'">
                 <xsl:attribute name="otherlevel">
-                    <xsl:text>box</xsl:text>
+                    <xsl:text>Box</xsl:text>
                 </xsl:attribute>
             </xsl:if>
             <!-- this next part grabs the @id attribute from column 53, if there is one-->
