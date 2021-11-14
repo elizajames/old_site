@@ -189,7 +189,7 @@
             <xsl:attribute name="level">
                 <xsl:value-of
                     select="
-                        if ($level = 'accession') then
+                        if ($level = 'box') then
                             'otherlevel'
                         else
                             $level"
