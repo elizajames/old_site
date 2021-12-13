@@ -687,7 +687,7 @@
                                 then
                                     preceding-sibling::ss:Cell[1]/ss:Data
                                 else
-                                    'Carton'"
+                                    'Item'"
                         />
                     </xsl:attribute>
                     <xsl:apply-templates/>
