@@ -7,21 +7,17 @@ credits: true
 # Edit the markdown on in this file to describe your collection
 # Look in _includes/feature for options to easily add features to the page
 ---
+<!--{% include feature/jumbotron.html objectid="https://cdil.lib.uidaho.edu/images/palouse_sm.jpg" %}-->
 
-{% include feature/jumbotron.html objectid="https://cdil.lib.uidaho.edu/images/palouse_sm.jpg" %}
+<!--{% include feature/nav-menu.html sections="About Elizabeth" %}-->
+## About
 
-{% include feature/nav-menu.html sections="About the Collection;About the About Page" %}
+I am an archivist and maker of sundry digital and analog things. In my current position, I do a little bit of everything: digital preservation, data wrangling, repository management, teaching, metadata creation, data consultations, collections processing, and plenty of "other duties as assigned."
 
-## About the Collection
+My scholarship focuses on using cultural heritage metadata as data for teaching, discovery, and research; non-traditional forms of engagement with digital archival materials; and scalable approaches to digital preservation and repository management for small and medium size institutions. I’m interested in a little bit of everything related to archives, technology, and how technology can facilitate access to library and archives resources in both positive and negative ways. I'm particularly interested in how technology can help leverage digitized and digital cultural heritage materials to further scholarship, discovery, and use of cultural heritage materials.
 
-This site is generated using [CollectionBuilder-GH](https://collectionbuilding.github.io/gh/), a project to create a free and simple digital collection using [GitHub Pages](https://pages.github.com/) from: 
+My creative work includes embroidery, cross stitch, crochet, and zine-making, usually with satirical or humorous themes.
 
-- a CSV of collection metadata
-- a folder of JPG images or PDF documents
+This Omeka site features various projects I've done and resources I've created under the categories outlined in the navigation bar above and under the browse section. All resources are freely available for reuse under a Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) License.
 
-The template repository features four objects from the University of Idaho Library's [Digital Collections](https://www.lib.uidaho.edu/digital). 
-
-For full details of creating your own collection site, visit [CollectionBuilder Documentation](https://collectionbuilder.github.io/cb-docs/)!
-
-<!-- IMPORTANT!!! DELETE this comment and the include below when you are finished editing this page for your collection. The include below introduces about page features. They will show up on your collection's about page until you delete it.  -->
-{% include cb/about_the_about.md %} 
+As an archivist in Appalachia, I care about increasing access and decreasing inequity in archives and libraries. If you like those things too, let's talk!
